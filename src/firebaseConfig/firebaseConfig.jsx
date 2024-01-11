@@ -6,15 +6,18 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAL1Y1fCVpz9eWxSChQHP9llZwlJNaLDuo",
-  authDomain: "any-project-a7278.firebaseapp.com",
-  projectId: "any-project-a7278",
-  storageBucket: "any-project-a7278.appspot.com",
-  messagingSenderId: "850652531339",
-  appId: "1:850652531339:web:e4dfc610478dd74533a28e"
+  apiKey: "AIzaSyD_KOhmLR8WftsvyG2LmlQdexzoVJA9e6Y",
+  authDomain: "listtube-11ac3.firebaseapp.com",
+  projectId: "listtube-11ac3",
+  storageBucket: "listtube-11ac3.appspot.com",
+  messagingSenderId: "603819851979",
+  appId: "1:603819851979:web:22e47fb4be8bd6fffd1b4e"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+
 export const auth =getAuth(app);
+
+

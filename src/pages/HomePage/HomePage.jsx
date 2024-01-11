@@ -9,11 +9,13 @@ import usePic from "../../hooks/usePic";
 
 
 
+
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const HomePage = () => {
 
+    // eslint-disable-next-line no-unused-vars
     const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(AuthContext);
 
@@ -94,80 +96,88 @@ const HomePage = () => {
                 </form>
             </div>
 
-            <div className="mt-[50px] flex gap-10">
+            <div className="overflow-x-auto w-[1250px] h-[600px] p-4 border mt-[50px]">
 
-                <div className="border-red-300 border-2 w-[375px] p-[10px]">
-                    {pic.map((item) => <div key={item._id} className="">
-                        <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            <p> {item.name}</p>
+                <div className="mt-[50px] flex gap-10 mb-[50px]">
 
+                    {/* 1 */}
+
+                    <div className=" ">
+
+                        <div className="overflow-y-auto h-[500px]  p-10 border">
+                            {
+                                pic.map((item) => <div key={item._id} className="">
+
+                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+
+                                        <div className="mask mask-squircle w-6 h-6">
+                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
+                                        </div>
+                                        <p> {item.name}</p>
+
+                                    </div>
+
+                                </div>)
+                            }
                         </div>
 
-                    </div>)}
-                </div>
+                    </div>
 
-                {/* 2 */}
+                    {/* 2 */}
 
-                <div className="border-red-300 border-2 w-[375px] p-[10px]">
-                    {pic.map((item) => <div key={item._id} className="">
-                        <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            <p> {item.name}</p>
+                    <div className=" ">
 
+                        <div className="overflow-y-auto h-[500px]  p-10 border">
+                            {
+                                pic.map((item) => <div key={item._id} className="">
+
+                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+
+                                        <div className="mask mask-squircle w-6 h-6">
+                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
+                                        </div>
+                                        <p> {item.name}</p>
+
+                                    </div>
+
+                                </div>)
+                            }
                         </div>
 
-                    </div>)}
-                </div>
+                    </div>
 
-                {/* 3 */}
+                    {/* 2 */}
 
-                <div className="border-red-300 border-2 w-[375px] p-[10px]">
-                    {pic.map((item) => <div key={item._id} className="">
-                        <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            <p> {item.name}</p>
+                    <div className=" ">
 
+                        <div className="overflow-y-auto h-[500px]  p-10 border">
+                            {
+                                pic.map((item) => <div key={item._id} className="">
+
+                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+
+                                        <div className="mask mask-squircle w-6 h-6">
+                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
+                                        </div>
+                                        <p> {item.name}</p>
+
+                                    </div>
+
+                                </div>)
+                            }
                         </div>
 
-                    </div>)}
-                </div>
+                    </div>
 
-                {/* 4 */}
-                <div className="border-red-300 border-2 w-[375px] p-[10px]">
-                    {pic.map((item) => <div key={item._id} className="">
-                        <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            <p> {item.name}</p>
 
-                        </div>
 
-                    </div>)}
-                </div>
 
-                 {/* 5 */}
-                 <div className="border-red-300 border-2 w-[375px] p-[10px]">
-                    {pic.map((item) => <div key={item._id} className="">
-                        <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            <p> {item.name}</p>
 
-                        </div>
-
-                    </div>)}
                 </div>
 
             </div>
+
+
 
 
 
