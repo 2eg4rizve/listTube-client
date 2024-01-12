@@ -2,10 +2,11 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-import { FaUtensils } from "react-icons/fa";
-import { useContext } from "react";
+import { MdAttachment } from "react-icons/md";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import usePic from "../../hooks/usePic";
+import useCPerson from "../../hooks/useCPerson";
 
 
 
@@ -19,20 +20,32 @@ const HomePage = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(AuthContext);
 
-    console.log({ user })
+    //console.log({ user })
 
+    // eslint-disable-next-line no-unused-vars
     const [pic, isLoading] = usePic();
+    const [CPerson, CLoading] = useCPerson();
 
-    if (isLoading) {
+    const [upId,setUpId] = useState("");
+
+
+
+    if (isLoading || CLoading) {
         <p>Loading...........</p>
     }
 
     //console.log("pic  : ",pic.length())
 
-    console.log(pic);
+    //console.log(pic);
+
+   // console.log("CPerson : ", CPerson);
 
 
     const onSubmit = async (data) => {
+
+       
+
+        console.log("upId : ",upId);
 
         console.log(data)
 
@@ -81,93 +94,262 @@ const HomePage = () => {
     return (
         <div>
 
-            <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
 
-                    {/* image */}
-                    <div className="form-control w-full my-6">
-                        <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
-                    </div>
 
-                    <button className="btn">
-                        Add Item <FaUtensils className="ml-4"></FaUtensils>
-                    </button>
-
-                </form>
-            </div>
-
-            <div className="overflow-x-auto w-[1250px] h-[600px] p-4 border mt-[50px]">
+            <div className="overflow-x-auto w-[1250px] h-[500px] p-4 border mt-[50px] mb-[100px]">
 
                 <div className="mt-[50px] flex gap-10 mb-[50px]">
 
                     {/* 1 */}
 
-                    <div className=" ">
 
-                        <div className="overflow-y-auto h-[500px]  p-10 border">
+                    <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
+
                             {
-                                pic.map((item) => <div key={item._id} className="">
+                                <div>
 
-                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
 
-                                        <div className="mask mask-squircle w-6 h-6">
-                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                        <p> {item.name}</p>
+                                                <div className="flex justify-between gap-3">
 
-                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
 
-                                </div>)
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold">total : {item.cnt}</p>
+
+                                               
+
+                                                {
+                                                    <div className="h-[10px] flex justify-end ">
+                                                        <div>
+                                                            <form onSubmit={handleSubmit(onSubmit)}>
+
+                                                                {/* image */}
+                                                                <div className="form-control w-full my-[10px] btn-sm">
+                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
+                                                                </div>
+
+                                                                <button className="btn btn-sm ">
+                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
+                                                                </button>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                }
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+
+
+
                             }
                         </div>
 
+
                     </div>
+
+
+
+
+
 
                     {/* 2 */}
 
-                    <div className=" ">
+                    <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
 
-                        <div className="overflow-y-auto h-[500px]  p-10 border">
                             {
-                                pic.map((item) => <div key={item._id} className="">
+                                <div>
 
-                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
 
-                                        <div className="mask mask-squircle w-6 h-6">
-                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                        <p> {item.name}</p>
+                                                <div className="flex justify-between gap-3">
 
-                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
 
-                                </div>)
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold">total : {item.cnt}</p>
+
+                                               
+
+                                                {
+                                                    <div className="h-[10px] flex justify-end ">
+                                                        <div>
+                                                            <form onSubmit={handleSubmit(onSubmit)}>
+
+                                                                {/* image */}
+                                                                <div className="form-control w-full my-[10px] btn-sm">
+                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
+                                                                </div>
+
+                                                                <button className="btn btn-sm ">
+                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
+                                                                </button>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                }
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+
+
+
                             }
                         </div>
 
+
                     </div>
 
-                    {/* 2 */}
 
-                    <div className=" ">
+                    {/* 3 */}
 
-                        <div className="overflow-y-auto h-[500px]  p-10 border">
+                    <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
+
                             {
-                                pic.map((item) => <div key={item._id} className="">
+                                <div>
 
-                                    <div className="flex gap-3 mt-[20px] border-red-300 border-2  w-[350px] p-[5px]">
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
 
-                                        <div className="mask mask-squircle w-6 h-6">
-                                            <img src={item?.photo} alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                        <p> {item.name}</p>
+                                                <div className="flex justify-between gap-3">
 
-                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
 
-                                </div>)
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold">total : {item.cnt}</p>
+
+                                               
+
+                                                {
+                                                    <div className="h-[10px] flex justify-end ">
+                                                        <div>
+                                                            <form onSubmit={handleSubmit(onSubmit)}>
+
+                                                                {/* image */}
+                                                                <div className="form-control w-full my-[10px] btn-sm">
+                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
+                                                                </div>
+
+                                                                <button className="btn btn-sm ">
+                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
+                                                                </button>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                }
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+
+
+
                             }
                         </div>
 
+
                     </div>
+
+                 
+
+                    {/* 4 */}
+
+                  
+                  
 
 
 
