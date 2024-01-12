@@ -25,7 +25,7 @@ const HomePage = () => {
 
     // eslint-disable-next-line no-unused-vars
     const [pic, isLoading] = usePic();
-    const [CPerson, CLoading,refetch] = useCPerson();
+    const [CPerson, CLoading, refetch] = useCPerson();
 
     // eslint-disable-next-line no-unused-vars
     const [upId, setUpId] = useState("");
@@ -38,16 +38,16 @@ const HomePage = () => {
     }
 
     const handleUpdate = (item) => {
-      
-      
-        console.log("item : ",item);
+
+
+        console.log("item : ", item);
         // console.log("cnt : ", cnt);
         // console.log("id : ", id);
 
-        let x= item.cnt;
+        let x = item.cnt;
         x++;
 
-        
+
 
 
 
@@ -59,26 +59,26 @@ const HomePage = () => {
         console.log(updateData);
 
         fetch(`http://localhost:5000/cPerson/${item._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateData),
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.modifiedCount > 0) {
-                refetch()
-                Swal.fire({
-                  icon: "success",
-                  title: "Wow...",
-                  text: "Add successfully",
-                  confirmButtonText: "cool",
-                });
-              }
-            
-          });
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        icon: "success",
+                        title: "Wow...",
+                        text: "Add successfully",
+                        confirmButtonText: "cool",
+                    });
+                }
+
+            });
 
 
     }
@@ -93,22 +93,22 @@ const HomePage = () => {
 
 
 
-            <div className="overflow-x-auto w-[1250px] h-[500px] p-4 border mt-[50px] mb-[100px]">
+            <div className="overflow-x-auto lg:w-[1250px] h-[500px] p-4 border mt-[50px] mb-[100px]">
 
-                <div className="mt-[50px] flex gap-10 mb-[50px]">
+                <div className="mt-[50px] lg:flex gap-10 mb-[50px]">
 
                     {/* 1 */}
 
 
                     <div>
-                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
+                        <div className="overflow-y-auto  h-[400px]  p-10 border lg:w-[450px]">
 
                             {
                                 <div>
 
                                     {
                                         CPerson.map((item) => <div key={item._id}>
-                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[120px] p-[5px] ">
 
                                                 <div className="flex justify-between gap-3">
 
@@ -131,26 +131,16 @@ const HomePage = () => {
 
                                                 </div>
 
-                                                <p className="font-bold">total : {item.cnt}</p>
+                                                <p className="font-bold text-right">total : {item.cnt}</p>
 
-
-
-                                                {/* <form onSubmit={handleUpdate}>
-
-
-
-                                                    <button onClick={() => setCnt(item.cnt + 1)} type="submit">Submit</button>
-
-
-                                                </form> */}
-
-
-                                                <button
-                                                    onClick={() =>handleUpdate(item)}
-                                                    className="btn btn-sm"
-                                                >
-                                                   <MdAttachment className="ml-4"></MdAttachment>
-                                                </button>
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => handleUpdate(item)}
+                                                        className="btn btn-sm "
+                                                    >
+                                                        <MdAttachment className="ml-4"></MdAttachment>
+                                                    </button>
+                                                </div>
 
 
 
@@ -168,6 +158,297 @@ const HomePage = () => {
 
 
                                 </div>
+
+                                
+
+
+
+
+                            }
+                        </div>
+
+
+                    </div>
+
+                    {/* 2 */}
+
+                    <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border lg:w-[450px]">
+
+                            {
+                                <div>
+
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[120px] p-[5px] ">
+
+                                                <div className="flex justify-between gap-3">
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold text-right">total : {item.cnt}</p>
+
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => handleUpdate(item)}
+                                                        className="btn btn-sm "
+                                                    >
+                                                        <MdAttachment className="ml-4"></MdAttachment>
+                                                    </button>
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+                                
+
+
+
+
+                            }
+                        </div>
+
+
+                    </div>
+
+                     {/* 3 */}
+
+                     <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border lg:w-[450px]">
+
+                            {
+                                <div>
+
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[120px] p-[5px] ">
+
+                                                <div className="flex justify-between gap-3">
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold text-right">total : {item.cnt}</p>
+
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => handleUpdate(item)}
+                                                        className="btn btn-sm "
+                                                    >
+                                                        <MdAttachment className="ml-4"></MdAttachment>
+                                                    </button>
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+                                
+
+
+
+
+                            }
+                        </div>
+
+
+                    </div>
+
+                     {/* 4 */}
+
+                     <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
+
+                            {
+                                <div>
+
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[120px] p-[5px] ">
+
+                                                <div className="flex justify-between gap-3">
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold text-right">total : {item.cnt}</p>
+
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => handleUpdate(item)}
+                                                        className="btn btn-sm "
+                                                    >
+                                                        <MdAttachment className="ml-4"></MdAttachment>
+                                                    </button>
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+                                
+
+
+
+
+                            }
+                        </div>
+
+
+                    </div>
+
+
+                     {/* 5 */}
+
+                     <div>
+                        <div className="overflow-y-auto  h-[400px]  p-10 border lg:w-[450px]">
+
+                            {
+                                <div>
+
+                                    {
+                                        CPerson.map((item) => <div key={item._id}>
+                                            <div className=" mt-[10px] border-red-300 border-2 h-[120px] p-[5px] ">
+
+                                                <div className="flex justify-between gap-3">
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {item?.Cname}</p>
+                                                    </div>
+
+                                                    <div className="flex gap-2">
+                                                        <div className="mask mask-squircle w-6 h-6">
+                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                        <p> {user?.displayName}</p>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <p className="font-bold text-right">total : {item.cnt}</p>
+
+                                                <div className="flex justify-end">
+                                                    <button
+                                                        onClick={() => handleUpdate(item)}
+                                                        className="btn btn-sm "
+                                                    >
+                                                        <MdAttachment className="ml-4"></MdAttachment>
+                                                    </button>
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>)
+
+                                    }
+
+
+
+
+
+                                </div>
+
+                                
 
 
 
