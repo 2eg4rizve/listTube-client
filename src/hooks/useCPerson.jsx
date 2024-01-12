@@ -8,7 +8,7 @@ const useCPerson = () => {
         queryKey:['CPerson'],
         queryFn: async() => {
 
-            const result = await axios.get('http://localhost:5000/cPerson') // query patabo
+            const result = await axios.get('https://listtube-server.vercel.app/cPerson') // query patabo
             return result.data;
 
         }

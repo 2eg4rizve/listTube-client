@@ -15,6 +15,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import About from './pages/About/About';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage></HomePage>
+        element: <PrivateRoute><HomePage></HomePage></PrivateRoute>
       },
       {
         path: "/about",

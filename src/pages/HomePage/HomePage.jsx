@@ -58,7 +58,7 @@ const HomePage = () => {
         };
         console.log(updateData);
 
-        fetch(`http://localhost:5000/cPerson/${item._id}`, {
+        fetch(`https://listtube-server.vercel.app/cPerson/${item._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

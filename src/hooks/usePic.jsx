@@ -12,7 +12,7 @@ const usePic = () => {
         queryKey:['pic'],
         queryFn: async() => {
 
-            const result = await axios.get('http://localhost:5000/pic') // query patabo
+            const result = await axios.get('https://listtube-server.vercel.app/pic') // query patabo
             return result.data;
 
         }
