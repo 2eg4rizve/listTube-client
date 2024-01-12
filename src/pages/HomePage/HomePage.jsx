@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -24,9 +25,11 @@ const HomePage = () => {
 
     // eslint-disable-next-line no-unused-vars
     const [pic, isLoading] = usePic();
-    const [CPerson, CLoading] = useCPerson();
+    const [CPerson, CLoading,refetch] = useCPerson();
 
-    const [upId,setUpId] = useState("");
+    // eslint-disable-next-line no-unused-vars
+    const [upId, setUpId] = useState("");
+    const [cnt, setCnt] = useState("");
 
 
 
@@ -34,60 +37,54 @@ const HomePage = () => {
         <p>Loading...........</p>
     }
 
-    //console.log("pic  : ",pic.length())
+    const handleUpdate = (item) => {
+      
+      
+        console.log("item : ",item);
+        // console.log("cnt : ", cnt);
+        // console.log("id : ", id);
 
-    //console.log(pic);
+        let x= item.cnt;
+        x++;
 
-   // console.log("CPerson : ", CPerson);
+        
 
 
-    const onSubmit = async (data) => {
 
-       
+        const updateData = {
+            Cname: item.Cname,
+            cnt: x,
+            CImage: item.CImage,
+        };
+        console.log(updateData);
 
-        console.log("upId : ",upId);
-
-        console.log(data)
-
-        // image upload to imgbb and then get an url
-
-        const imageFile = { image: data.image[0] }
-
-        const res = await axios.post(image_hosting_api, imageFile, {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        });
-
-        if (res.data.success) {
-            // now send the menu item data to the server with the image url
-            const menuItem = {
-                email: user.email,
-                name: user.displayName,
-                photo: user.photoURL,
-                image: res.data.data.display_url
-            }
-
-            console.log("my data : ", menuItem)
-
-            const menuRes = await axios.post('http://localhost:5000/pic', menuItem);
-
-            console.log(menuRes.data)
-            if (menuRes.data.insertedId) {
-                // show success popup
-                //reset();
+        fetch(`http://localhost:5000/cPerson/${item._id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+                refetch()
                 Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `Add Photo Successfully`,
-                    showConfirmButton: false,
-                    timer: 1500
+                  icon: "success",
+                  title: "Wow...",
+                  text: "Add successfully",
+                  confirmButtonText: "cool",
                 });
-            }
-        }
+              }
+            
+          });
 
-        console.log('with image url', res.data);
-    };
+
+    }
+
+
+
 
 
 
@@ -136,111 +133,28 @@ const HomePage = () => {
 
                                                 <p className="font-bold">total : {item.cnt}</p>
 
-                                               
 
-                                                {
-                                                    <div className="h-[10px] flex justify-end ">
-                                                        <div>
-                                                            <form onSubmit={handleSubmit(onSubmit)}>
 
-                                                                {/* image */}
-                                                                <div className="form-control w-full my-[10px] btn-sm">
-                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
-                                                                </div>
-
-                                                                <button className="btn btn-sm ">
-                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
-                                                                </button>
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                }
+                                                {/* <form onSubmit={handleUpdate}>
 
 
 
-                                            </div>
-                                        </div>)
+                                                    <button onClick={() => setCnt(item.cnt + 1)} type="submit">Submit</button>
 
-                                    }
+
+                                                </form> */}
+
+
+                                                <button
+                                                    onClick={() =>handleUpdate(item)}
+                                                    className="btn btn-sm"
+                                                >
+                                                   <MdAttachment className="ml-4"></MdAttachment>
+                                                </button>
 
 
 
 
-
-                                </div>
-
-
-
-
-                            }
-                        </div>
-
-
-                    </div>
-
-
-
-
-
-
-                    {/* 2 */}
-
-                    <div>
-                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
-
-                            {
-                                <div>
-
-                                    {
-                                        CPerson.map((item) => <div key={item._id}>
-                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
-
-                                                <div className="flex justify-between gap-3">
-
-                                                    <div className="flex gap-2">
-                                                        <div className="mask mask-squircle w-6 h-6">
-                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                        <p> {item?.Cname}</p>
-                                                    </div>
-
-                                                    <div className="flex gap-2">
-                                                        <div className="mask mask-squircle w-6 h-6">
-                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                        <p> {user?.displayName}</p>
-
-                                                    </div>
-
-
-
-                                                </div>
-
-                                                <p className="font-bold">total : {item.cnt}</p>
-
-                                               
-
-                                                {
-                                                    <div className="h-[10px] flex justify-end ">
-                                                        <div>
-                                                            <form onSubmit={handleSubmit(onSubmit)}>
-
-                                                                {/* image */}
-                                                                <div className="form-control w-full my-[10px] btn-sm">
-                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
-                                                                </div>
-
-                                                                <button className="btn btn-sm ">
-                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
-                                                                </button>
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                }
 
 
 
@@ -265,91 +179,19 @@ const HomePage = () => {
                     </div>
 
 
-                    {/* 3 */}
-
-                    <div>
-                        <div className="overflow-y-auto  h-[400px]  p-10 border w-[450px]">
-
-                            {
-                                <div>
-
-                                    {
-                                        CPerson.map((item) => <div key={item._id}>
-                                            <div className=" mt-[10px] border-red-300 border-2 h-[180px] p-[5px] ">
-
-                                                <div className="flex justify-between gap-3">
-
-                                                    <div className="flex gap-2">
-                                                        <div className="mask mask-squircle w-6 h-6">
-                                                            <img src={item.CImage} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                        <p> {item?.Cname}</p>
-                                                    </div>
-
-                                                    <div className="flex gap-2">
-                                                        <div className="mask mask-squircle w-6 h-6">
-                                                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
-                                                        <p> {user?.displayName}</p>
-
-                                                    </div>
-
-
-
-                                                </div>
-
-                                                <p className="font-bold">total : {item.cnt}</p>
-
-                                               
-
-                                                {
-                                                    <div className="h-[10px] flex justify-end ">
-                                                        <div>
-                                                            <form onSubmit={handleSubmit(onSubmit)}>
-
-                                                                {/* image */}
-                                                                <div className="form-control w-full my-[10px] btn-sm">
-                                                                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
-                                                                </div>
-
-                                                                <button className="btn btn-sm ">
-                                                                    Add Item <MdAttachment className="ml-4"></MdAttachment>
-                                                                </button>
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                }
-
-
-
-                                            </div>
-                                        </div>)
-
-                                    }
 
 
 
 
 
-                                </div>
 
 
 
 
-                            }
-                        </div>
 
 
-                    </div>
 
-                 
 
-                    {/* 4 */}
-
-                  
-                  
 
 
 

@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const useCPerson = () => {
-    const {data: CPerson = [] ,isLoading : CLoading} = useQuery({
+    const {data: CPerson = [] ,isLoading : CLoading,refetch} = useQuery({
 
         queryKey:['CPerson'],
         queryFn: async() => {
@@ -17,7 +17,7 @@ const useCPerson = () => {
 
   
 
-    return [CPerson,CLoading];
+    return [CPerson,CLoading,refetch];
 };
 
 export default useCPerson;
